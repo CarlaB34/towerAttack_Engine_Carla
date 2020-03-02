@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-/* Controller Global du System de Map
+/* Controller Global du System de Map 6
  * Contient les references vers les Datas de la map (MapData) 
  * Contient les references vers les vues de la map
  */
