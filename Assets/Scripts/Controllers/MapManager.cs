@@ -131,6 +131,31 @@ public class MapManager : MonoBehaviour
             mapData.grid[index].state = newSquareState;
         }
     }
+    
+    //calcule la positon et fait l'ajout de hori //+
+    public void SetEdgesHoriState(Vector3 position, bool IsAdding)
+    {
+        
+        int index = GetIndexEdgesHoriFromPos(position);
+        if (index != -1)
+        {
+            mapData.edgesHori[index] = IsAdding;
+        }
+    }
+
+    //calcule la positon et fait l'ajout de vert //+
+    //active  le add par rapport remove
+    public void SetEdgesVertState(Vector3 position, bool IsAdding)
+    {
+
+        int index = GetIndexEdgesVertFromPos(position);
+        if (index != -1)
+        {
+            Debug.Log("index :" + index + " pos :" + position);
+            mapData.edgesVert[index] = IsAdding;
+        }
+    }
+
 
     private SquareState RandomStateWithSkipOneValue(SquareState skippedValue)
     {
@@ -230,7 +255,31 @@ public class MapManager : MonoBehaviour
     #endregion SQUARES
 
     #region EDGES
-    private void InitizeEmptyEdges()
+
+    // horizontal pour la position pour le toggle //+
+    private int GetIndexEdgesHoriFromPos(Vector3 pos)
+    {
+        // Test si la position sort des limites
+        if (pos.x >= 0 && pos.z >= 0 && pos.x < mapData.width && pos.z < mapData.height)
+        {
+            return ((int)pos.z * mapData.width) + (int)pos.x;
+        }
+        // Pas de square à la position demandée => on retourne -1
+        return -1;
+    }
+
+    // vertical //+
+    private int GetIndexEdgesVertFromPos(Vector3 pos)
+    {
+        // Test si la position sort des limites
+        if (pos.x >= 0 && pos.z >= 0 && pos.x < mapData.width && pos.z < mapData.height)
+        {
+            return ((int)pos.z * (mapData.width + 1)) + (int)pos.x;
+        }
+        // Pas de square à la position demandée => on retourne -1
+        return -1;
+    }
+    private void InitizeEmptyEdges() 
     {
         mapData.edgesHori = new bool[mapData.width * (mapData.height + 1)];
         mapData.edgesVert = new bool[(mapData.width + 1) * mapData.height];
@@ -251,7 +300,8 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    private void ProcessRuleSquareVSEdge(bool[] arrayEdges, int width, Vector3 adderTestLock)
+    //était en private
+    public void ProcessRuleSquareVSEdge(bool[] arrayEdges, int width, Vector3 adderTestLock)
     {
         for (int i = 0; i < arrayEdges.Length; i++)
         {
@@ -271,7 +321,8 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    private void ValidateIfNoLockSquare(Vector3 newPosSquare)
+    //était en private
+    public void ValidateIfNoLockSquare(Vector3 newPosSquare)
     {
 
         // On recupere l'index du square en fonction de la position.
@@ -292,7 +343,7 @@ public class MapManager : MonoBehaviour
     }
 
     // Permet de créer la vue des edges en fonction de leur existance ou non.
-    private void CreateEdgesView(ref bool[] arrayEdges, GameObject prefabEdge, int width, Vector3 adderPosition)
+    public void CreateEdgesView(ref bool[] arrayEdges, GameObject prefabEdge, int width, Vector3 adderPosition)
     {
         for (int i = 0; i < arrayEdges.Length; i++)
         {
@@ -311,6 +362,7 @@ public class MapManager : MonoBehaviour
     #endregion EDGES
 
     #region SURFACE
+
     // Permet de créer automatiquement la surface du navmesh à partir des données de la map
     private void CreateSurface()
     {
@@ -348,7 +400,9 @@ public class MapManager : MonoBehaviour
     #endregion SURFACE
 
     #region DEBUG DRAW GIZMO MAP
-    private void OnDrawGizmos()
+
+    //reuni les gizmos
+    private void OnDrawGizmos() 
     {
         if (showDebugGrid)
         {
@@ -462,4 +516,3 @@ public class MapManager : MonoBehaviour
     }
     #endregion DEBUG DRAW GIZMO MAP
 }
-
