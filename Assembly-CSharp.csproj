@@ -63,7 +63,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Controllers\Entity\Entity.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Entity\EntityManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Entity\EntityMoveable.cs" />
     <Compile Include="Assets\Scripts\Controllers\MapManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Core\Pooling\pooling.cs" />
+    <Compile Include="Assets\Scripts\Core\Pooling\PoolingManager.cs" />
+    <Compile Include="Assets\Scripts\Core\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Core\SingletonMono.cs" />
     <Compile Include="Assets\Scripts\Datas\MapData.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/carli/Desktop/Script unity/git/ProjetGitTravail/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

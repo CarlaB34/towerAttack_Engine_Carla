@@ -45,16 +45,6 @@ public enum Alignment
     Player
 }
 
-///+
-public enum ConditBrush
-{
-    // represente le fait d'editer un seul square (l'état de base déjà codé)
-    One,
-    //represente l'edition d'une ligne de deux squares
-    Line
-}
-
-/// 
 
 
 [Serializable]
